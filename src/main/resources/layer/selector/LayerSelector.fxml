@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="layer.selector.LayerSelector" stylesheets="/layer/selector/LayerSelector.css">
+    <TableView fx:id="layerTable">
+        <columns>
+            <TableColumn fx:id="checkedCol" resizable="false">
+            </TableColumn>
+            <TableColumn fx:id="colorCol" resizable="false">
+            </TableColumn>
+            <TableColumn fx:id="nameCol" resizable="false">
+            </TableColumn>
+        </columns>
+    </TableView>
+    <HBox>
+        <Button contentDisplay="GRAPHIC_ONLY">
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/eye_16px.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button contentDisplay="GRAPHIC_ONLY">
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/invisible_16px.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
+</VBox>
