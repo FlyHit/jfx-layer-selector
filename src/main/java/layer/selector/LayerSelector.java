@@ -1,5 +1,6 @@
 package layer.selector;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -15,14 +17,19 @@ import javafx.scene.paint.Color;
  */
 public class LayerSelector {
     private final ObservableList<Layer> layers;
-    @FXML
-    private TableView<Layer> layerTable;
+    private static final int EXTRA_WIDTH = 10;
+    private static final int EXTRA_HEIGHT = 10;
     @FXML
     private TableColumn<Layer, Boolean> checkedCol;
     @FXML
     private TableColumn<Layer, Color> colorCol;
     @FXML
     private TableColumn<Layer, String> nameCol;
+    private static final int ROW_HEIGHT = 40;
+    @FXML
+    private VBox vBox;
+    @FXML
+    private TableView<Layer> layerTable;
 
     public LayerSelector() {
         layers = FXCollections.observableArrayList();
@@ -30,10 +37,13 @@ public class LayerSelector {
 
     @FXML
     private void initialize() {
+        // add extra width to offset borders or insets' width
+        vBox.prefWidthProperty().bind(checkedCol.widthProperty().add(colorCol.widthProperty()).add(nameCol.widthProperty()).add(EXTRA_HEIGHT));
         initLayerTable();
     }
 
     private void initLayerTable() {
+        GUIUtils.autoFitTable(layerTable);
         layerTable.setEditable(true);
 
         layerTable.setItems(layers);
@@ -43,8 +53,9 @@ public class LayerSelector {
         colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        checkedCol.setPrefWidth(30);
-//        colorCol.setPrefWidth(30);
+        layerTable.setFixedCellSize(ROW_HEIGHT);
+        layerTable.prefHeightProperty().bind(layerTable.fixedCellSizeProperty().multiply(Bindings.size(layerTable.getItems())).add(EXTRA_WIDTH));
+        layerTable.minHeightProperty().bind(layerTable.prefHeightProperty());
     }
 
     public void addLayer(Layer layer) {

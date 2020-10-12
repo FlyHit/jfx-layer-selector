@@ -4,7 +4,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
 /**
- * @author Michael Simons
+ * @author Michael Simons, Chen Jiongyu
  */
 public class ColorTableCell<T> extends TableCell<T, Color> {
     private final ColorPicker colorPicker;
@@ -12,11 +12,11 @@ public class ColorTableCell<T> extends TableCell<T, Color> {
     public ColorTableCell(TableColumn<T, Color> column) {
         this.colorPicker = new ColorPicker();
         this.colorPicker.getStyleClass().add("button");
-        this.colorPicker.valueProperty().addListener((observable, oldColor, newColor) -> {
-            this.colorPicker.setStyle("-fx-background-color: rgba(" + newColor.getRed() * 255 + "," +
-                    newColor.getGreen() * 255 + "," +
-                    newColor.getBlue() * 255 + "," +
-                    newColor.getOpacity() + ")");
+        this.colorPicker.setOnAction(event -> {
+            // the event happens after we pick color
+            Color color = colorPicker.getValue();
+            this.colorPicker.setStyle("-fx-background-color: rgba(" + color.getRed() * 255 + "," +
+                    color.getGreen() * 255 + "," + color.getBlue() * 255 + "," + color.getOpacity() + ")");
         });
         this.colorPicker.editableProperty().bind(column.editableProperty());
         this.colorPicker.disableProperty().bind(column.editableProperty().not());

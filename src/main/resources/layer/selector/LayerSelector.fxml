@@ -7,26 +7,27 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
-      fx:controller="layer.selector.LayerSelector" stylesheets="/layer/selector/LayerSelector.css">
+      fx:id="vBox" fx:controller="layer.selector.LayerSelector" stylesheets="/layer/selector/LayerSelector.css">
     <TableView fx:id="layerTable">
         <columns>
-            <TableColumn fx:id="checkedCol" resizable="false">
+            <TableColumn fx:id="checkedCol" minWidth="0">
+
             </TableColumn>
-            <TableColumn fx:id="colorCol" resizable="false">
+            <TableColumn fx:id="nameCol" minWidth="0">
             </TableColumn>
-            <TableColumn fx:id="nameCol" resizable="false">
+            <TableColumn fx:id="colorCol" minWidth="0">
             </TableColumn>
         </columns>
     </TableView>
     <HBox>
-        <Button contentDisplay="GRAPHIC_ONLY">
+        <Button contentDisplay="GRAPHIC_ONLY" styleClass="transparent">
             <graphic>
                 <ImageView>
                     <Image url="/icons/eye_16px.png"/>
                 </ImageView>
             </graphic>
         </Button>
-        <Button contentDisplay="GRAPHIC_ONLY">
+        <Button contentDisplay="GRAPHIC_ONLY" styleClass="transparent">
             <graphic>
                 <ImageView>
                     <Image url="/icons/invisible_16px.png"/>
